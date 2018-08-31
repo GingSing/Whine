@@ -9,6 +9,10 @@ const logIn = (req, res) => {
   console.log("hello");
 }
 
+const logOut = (req, res) => {
+  console.log("logout");
+}
+
 const register = (req, res) => {
   if(req.body.email &&
     req.body.username &&
@@ -27,7 +31,7 @@ const register = (req, res) => {
         if(err){
           return next(err);
         }else{
-          return res.send("hi");
+          return res.redirect('/');
         }
       });
 
@@ -35,6 +39,7 @@ const register = (req, res) => {
 }
 
 usersRouter.get('/login', logIn);
+usersRouter.get('/logout', logOut);
 usersRouter.get('/register', register);
 
 module.exports = usersRouter;
