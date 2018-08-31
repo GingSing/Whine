@@ -4,9 +4,9 @@ var RestaurantSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true, trim: true },
   location: { type: String, required: true },
   pictures: { type: GridFS },
-  hours: { type: Array },
-  storeinfo: { type: Array },
-  reviews: { type: Array }
+  hours: Array,
+  storeInfo: Array,
+  reviews: Array
 });
 
 var Restaurant = mongoose.model('Restaurant', RestaurantSchema);
