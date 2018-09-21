@@ -1,0 +1,17 @@
+.feed{
+  display: flex;
+  justify-content: center;
+}
+.feed-list{
+  width: 80%;
+  border: 1px solid black;
+  height: 500px;
+}
+.feed-header{
+  text-align: center;
+}
+@media (max-width: 480px) {
+}
+
+@media (min-width: 481px){
+}

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './LogoBar.css';
+
 class LogoBar extends Component{
   constructor(props){
     super(props);
@@ -22,7 +24,6 @@ class LogoBar extends Component{
       <div className="logo-bar">
         <div className="logo-text-wrapper">
           <h3 className="logo"> Whine </h3>
-          <button onClick={this.dropdown} className="options"> V </button>
         </div>
       </div>
     );
