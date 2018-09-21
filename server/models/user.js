@@ -6,11 +6,7 @@ var UserSchema = new mongoose.Schema ({
   name: { type: String, required: true, trim: true },
   email: { type: String, required: true, trim: true },
   dateJoined: { type: Date, default: Date.now },
-  comments: [{ body: "string", by: Schema.Types.ObjectId }],
-  posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
-  admin: Boolean,
-  reviewedItems:[{ type: Schema.Types.ObjectId, ref: 'Item' }],
-  reviewedRestaurants: [{ type: Schema.Types.ObjectId, ref: 'Restaurants' }]
+  admin: Boolean
 })
 
 var User = mongoose.model('User', UserSchema);

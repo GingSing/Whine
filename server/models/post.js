@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 var PostSchema = new mongoose.Schema({
-  _id: Schema.Types.ObjectId,
   date: { type: Date, default: Date.now },
   postedBy{ type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   title: { type: String, required: true, trim: true },

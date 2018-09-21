@@ -6,7 +6,13 @@ const usersRouter = express.Router();
 var db = mongoose.connection;
 
 const logIn = (req, res) => {
-  console.log("hello");
+  User.find({username: req.body.username, password: req.body.password}, function(err, user){
+    if(err){
+      res.send('error');
+    }else{
+      res.send('token');
+    }
+  })
 }
 
 const logOut = (req, res) => {
@@ -38,8 +44,18 @@ const register = (req, res) => {
   }
 }
 
+const getAll = (req, res) => {
+  User.find({}, function(err, docs){
+    if(docs.length === 0 || !docs){
+      console.log("error");
+    }
+    console.log(docs);
+  });
+}
+
 usersRouter.get('/login', logIn);
 usersRouter.get('/logout', logOut);
 usersRouter.get('/register', register);
+usersRouter.get('/all', getAll);
 
 module.exports = usersRouter;

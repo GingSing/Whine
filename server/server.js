@@ -1,6 +1,7 @@
 var express = require('express')
 var mongoose = require('mongoose')
 var cors = require('cors')
+var bodyParser = require('body-parser')
 var app = express()
 
 const routes = require('./routes');
@@ -15,6 +16,8 @@ db.once('open', function(){
 
   //only operates if connected to db
   app.use(cors())
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.json());
   app.use('/', routes);
   app.set('port', process.env.PORT || 3001);
 
