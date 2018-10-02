@@ -6,14 +6,36 @@ import LogoBar from '../components/LogoBar';
 import NewsFeed from '../components/NewsFeed';
 
 class Home extends Component{
+  constructor(props){
+    super(props);
+    this.toggleSignIn = this.toggleSignIn.bind(this);
+    this.register = this.register.bind(this);
+    this.state = {
+      signedIn: false
+    }
+  }
+
+  toggleSignIn(){
+    this.setState({
+      signedIn: !this.state.signedIn
+    });
+  }
+
+  register(){
+
+  }
+
   render(){
     return(
       <div className="home">
 
         <div className="hero-header">
           <div className="user-bar">
-            <div class="login">
-              <span> Login </span>
+            {this.state.signedIn ? null :<div className="register" onClick={this.register}>
+              <span> Register </span>
+            </div>}
+            <div className="signin" onClick={this.toggleSignIn}>
+              {this.state.signedIn ? <span>Sign Out</span> : <span>Sign In</span>}
             </div>
           </div>
           <LogoBar />
