@@ -10,6 +10,7 @@ const logIn = (req, res) => {
     if(err){
       res.send('error');
     }else{
+      console.log('loggedIn');
       res.send('token');
     }
   })
@@ -33,15 +34,18 @@ const register = (req, res) => {
         email: req.body.email
       }
 
+
       User.create(userData, function(err, user) {
         if(err){
-          return next(err);
+          return err;
         }else{
           return res.redirect('/');
         }
       });
-
   }
+
+  console.log("registered");
+
 }
 
 const getAll = (req, res) => {
@@ -55,7 +59,7 @@ const getAll = (req, res) => {
 
 usersRouter.get('/login', logIn);
 usersRouter.get('/logout', logOut);
-usersRouter.get('/register', register);
+usersRouter.post('/register', register);
 usersRouter.get('/all', getAll);
 
 module.exports = usersRouter;

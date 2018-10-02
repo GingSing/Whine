@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
+var Post = require('./post');
 
-var PostItemSchema = new mongoose.Schema({
-  name: {type: String},
-});
+var Schema = mongoose.Schema;
 
-var PostItem = mongoose.model('PostItem', PostItemSchema);
+var PostItem = Post.discriminator('PostItem', new Schema({
+    item: { type: String, required: true }
+  })
+);
 
 module.exports = PostItem;

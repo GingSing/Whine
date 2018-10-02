@@ -12,7 +12,9 @@ class Home extends Component{
 
         <div className="hero-header">
           <div className="user-bar">
-            Login button
+            <div class="login">
+              <span> Login </span>
+            </div>
           </div>
           <LogoBar />
           <div className="search">

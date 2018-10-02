@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema ({
   name: { type: String, required: true, trim: true },
   email: { type: String, required: true, trim: true },
   dateJoined: { type: Date, default: Date.now },
-  admin: Boolean
+  admin: { type: Boolean, default: false }
 })
 
 var User = mongoose.model('User', UserSchema);

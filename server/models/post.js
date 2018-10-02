@@ -1,13 +1,12 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var PostSchema = new mongoose.Schema({
+var PostSchema = new Schema({
   date: { type: Date, default: Date.now },
-  postedBy{ type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  postedBy: { type: Schema.Types.ObjectId, ref: 'User'},
   title: { type: String, required: true, trim: true },
   content: { type: String, trim: true },
-  pictures: { type: GridFS },
-  rating: { type: Number, required: true },
-  comments: [{body: "string", by: mongoose.Schema.Types.ObjectId}]
+  rating: { type: Number, required: true }
 });
 
 var Post = mongoose.model('Post', PostSchema);

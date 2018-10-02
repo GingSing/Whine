@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
+var Post = require('./post');
 
-var PostRestaurantSchema = new mongoose.Schema({
-  name: {type:String},
-});
+var Schema = mongoose.Schema;
 
-var PostRestaurant = mongoose.model('PostRestaurant', PostRestaurantSchema);
+var PostRestaurant = Post.discriminator('PostRestaurant', new Schema({
+    restaurant: { type: String, required: true }
+  })
+);
 
 module.exports = PostRestaurant;
