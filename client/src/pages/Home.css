@@ -1,9 +1,4 @@
 @media (max-width: 480px) {
-  .logo-text-wrapper{
-    display: flex;
-    width: 80%;
-    justify-content: space-between;
-  }
   .options{
     background-color: white;
     color: black;
@@ -43,40 +38,9 @@
 }
 
 @media (min-width: 481px){
-  .user-bar{
-    position: absolute;
-    right: 0;
-    margin: 5px 5px 0px 0px;
-    display: flex;
-  }
-  .user-bar img{
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
-  }
   .hero-header{
     background: url("/whining.jpg") no-repeat top;
     background-attachment: fixed;
-  }
-  .register{
-    text-align: center;
-    line-height: 30px;
-    height: 30px;
-    width: 70px;
-    margin: 8px;
-  }
-  .register:hover{
-    cursor: pointer;
-  }
-  .signin{
-    text-align: center;
-    line-height: 30px;
-    width: 70px;
-    height: 30px;
-    margin: 8px;
-  }
-  .signin:hover{
-    cursor:pointer;
   }
   .search{
     display: flex;
@@ -109,6 +73,5 @@
     display: none;
   }
   .home{
-    height: 1000px;
   }
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { getNewPosts } from '../_actions/homeActions';
+import { connect } from 'react-redux';
 import './NewsFeed.css';
 
 import FeedCard from './FeedCard';
@@ -10,7 +12,6 @@ class NewsFeed extends Component{
     this.updateFeed=this.updateFeed.bind(this);
 
     this.state={
-      feed: [],
       page: 0
     }
   }
@@ -20,16 +21,7 @@ class NewsFeed extends Component{
   }
 
   updateFeed(){
-    fetch(`http://localhost:3001/reviews`)
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({
-        feed: data
-      });
-    })
-    .catch((error) =>{
-      console.log(error);
-    })
+    this.props.getNewPosts();
   }
 
   render(){
@@ -39,7 +31,7 @@ class NewsFeed extends Component{
         <div className="feed">
           <ul className="feed-list">
             {
-              this.state.feed.map((data, key) => {return <li key={ key }><FeedCard data={this.props.data} /></li>})
+              this.props.feed.map((data, key) => {return <li key={ key }><FeedCard data={data} /></li>})
             }
           </ul>
           <div className="feed-page-selector">
@@ -50,4 +42,8 @@ class NewsFeed extends Component{
   }
 }
 
-export default NewsFeed;
+const mapStateToProps = (state) => ({
+  feed: state.feed.feed
+});
+
+export default connect(mapStateToProps, { getNewPosts })(NewsFeed);

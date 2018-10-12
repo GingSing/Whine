@@ -1,51 +1,68 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../../models/user');
+const bcrypt = require('bcryptjs');
 
 const usersRouter = express.Router();
 var db = mongoose.connection;
 
 const logIn = (req, res) => {
-  User.find({username: req.body.username, password: req.body.password}, function(err, user){
+  User.find({username: req.body.username}, function(err, user){
     if(err){
-      res.send('error');
+      res.send(err);
+    }else if(user.length > 0){
+      user.map((data) => {
+        if(bcrypt.compareSync(req.body.password, data.password)){
+          res.status(200).send(JSON.stringify({ success: "successful", user: data.username }));
+          //change to return tokens
+        }
+      })
     }else{
-      console.log('loggedIn');
-      res.send('token');
+      res.status(400).send(JSON.stringify({ error: "wrong password"}));
     }
   })
-}
-
-const logOut = (req, res) => {
-  console.log("logout");
-}
+};
 
 const register = (req, res) => {
-  if(req.body.email &&
-    req.body.username &&
-    req.body.name &&
-    req.body.password &&
-    req.body.passwordConf === req.body.password){
+  if(!containsAll(req.body)){
+    return res.status(422).json({ error: 'Missing Data'});
+  }else if(!emailIsCorrect(req.body)){
+    return res.status(422).json({ error: 'Email Incorrect'});
+  }else if(!passwordConfirmed(req.body)){
+    return res.status(422).json({ error: 'Password Not Confirmed'});
+  }else{
 
-      var userData = {
-        username: req.body.username,
-        name: req.body.name,
-        password: req.body.password,
-        email: req.body.email
+    var salt = bcrypt.genSaltSync(10);
+
+    var userData = {
+      username: req.body.username,
+      name: req.body.name,
+      password: bcrypt.hashSync(req.body.password, salt),
+      email: req.body.email
+    }
+
+    User.create(userData, function(err, user) {
+      if(err){
+        return res.status(422).json({ error: 'Username Or Email Unavailable'});
+      }else{
+        console.log("registered");
+        return res.status(200).json({ success: 'Successfully Registered'});
       }
-
-
-      User.create(userData, function(err, user) {
-        if(err){
-          return err;
-        }else{
-          return res.redirect('/');
-        }
-      });
+    });
   }
 
-  console.log("registered");
-
+  function containsAll(body){
+    return (body.email !== "" && body.username !== "" && body.name !== "" && body.password !== "");
+  }
+  function emailIsCorrect(body){
+    let email = body.email;
+    let endsWithComOrCa = email.endsWith(".ca") || email.endsWith(".com");
+    let containsAt = email.includes("@");
+    return(endsWithComOrCa && containsAt && email.length < 65);
+  }
+  function passwordConfirmed(body){
+    return body.passwordConf === body.password;
+  }
 }
 
 const getAll = (req, res) => {
@@ -57,8 +74,7 @@ const getAll = (req, res) => {
   });
 }
 
-usersRouter.get('/login', logIn);
-usersRouter.get('/logout', logOut);
+usersRouter.post('/login', logIn);
 usersRouter.post('/register', register);
 usersRouter.get('/all', getAll);
 

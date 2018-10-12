@@ -9,12 +9,18 @@ function signIn(username, password){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, password })
   };
-
   return fetch('http://localhost:3001/user/login', requestOptions)
-    .then(handleResponse)
+    .then(res => {
+        if(res.ok){
+          return res.json()
+        }else{
+          console.log("res not ok");
+          throw Error(res.statusText);
+        }
+      })
     .then(user => {
-      if(user.token){
-        localStorage.setItem('user', JSON.stringify(user));
+      if(user && user.success === "successful"){
+        localStorage.setItem('user', user.user);
       }
       return user;
     });
@@ -22,8 +28,4 @@ function signIn(username, password){
 
 function signOut(){
   localStorage.removeItem('user');
-}
-
-function handleResponse(){
-
 }

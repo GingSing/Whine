@@ -15,7 +15,7 @@ db.once('open', function(){
   console.log('connected to mongodb');
 
   //only operates if connected to db
-  app.use(cors())
+  app.use(cors());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use('/', routes);

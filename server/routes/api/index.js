@@ -8,12 +8,15 @@ const Restaurant = require('../../models/postRestaurant');
 const Item = require('../../models/postItem');
 
 const getReviews = (req, res) => {
+  console.log("getting reviews");
   Promise.all([
     Restaurant.find(),
     Item.find()
   ])
   .then(results => {
-    res.send(results);
+    console.log("sending results");
+    console.log(results[0].concat(results[1]).slice(0,11));
+    res.send(results[0].concat(results[1]).slice(0,11));
   })
   .catch(err => {
     console.log("Error");
@@ -76,7 +79,7 @@ apiRouter.get('/restaurant/reviews/:id', getRestaurantReview);
 apiRouter.get('/item/reviews/:id', getItemReview);
 apiRouter.get('/item/reviews', getItemReviews);
 
-apiRouter.get('/reviews', getReviews);
+apiRouter.post('/reviews', getReviews);
 
 apiRouter.post('/restaurant/review', reviewRestaurant);
 apiRouter.post('/item/review', reviewItem);

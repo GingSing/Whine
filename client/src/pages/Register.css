@@ -1,0 +1,14 @@
+@media(min-width: 481px){
+  .register{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .register-label{
+    display:inline-block;
+    width: 150px;
+    margin: 5px;
+  }
+  .register-form{
+  }
+}

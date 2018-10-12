@@ -1,9 +1,17 @@
 @media (min-width: 481px){
   .logo-bar {
+    width: 100%;
     display: flex;
     justify-content: center;
     margin-bottom: 3%;
+    padding-top: 3%;
     font-size: 35px;
+  }
+  .logo{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 50px;
+    color: black;
   }
 }
 @media (max-width: 480px) {
@@ -12,5 +20,9 @@
     justify-content:center;
     border-bottom: 1px solid black;
     margin-bottom: 30px;
+  }
+  .logo-text-wrapper{
+    display: flex;
+    justify-content: space-between;
   }
 }

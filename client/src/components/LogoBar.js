@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import './LogoBar.css';
 
@@ -23,7 +24,7 @@ class LogoBar extends Component{
     return(
       <div className="logo-bar">
         <div className="logo-text-wrapper">
-          <h3 className="logo"> Whine </h3>
+        <Link className="logo" to="/">Whine</Link>
         </div>
       </div>
     );

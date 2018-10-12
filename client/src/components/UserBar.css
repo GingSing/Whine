@@ -1,0 +1,33 @@
+@media(max-width: 480px){
+  .user-bar-links{
+    text-decoration: none;
+    color: black;
+  }
+}
+@media (min-width: 481px){
+  .user-bar{
+    position: absolute;
+    right: 0;
+    margin: 5px 5px 0px 0px;
+    display: flex;
+    position: fixed;
+  }
+  .user-bar-links{
+    color: black;
+    text-decoration: none;
+    line-height: 45px;
+  }
+  .signin-button{
+    text-align: center;
+    line-height: 30px;
+    width: 70px;
+    margin: 8px;
+  }
+  .signin-button:hover{
+    cursor:pointer;
+  }
+  .signin-button{
+    text-decoration: none;
+    color: black;
+  }
+}
