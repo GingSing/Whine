@@ -65,6 +65,7 @@ const reviewRestaurant = (req, res) => {
 }
 
 const reviewItem = (req, res) => {
+  console.log("reviewed");
   Item.create(req.body, function(err, item){
     if(err){
       res.send('error 404');

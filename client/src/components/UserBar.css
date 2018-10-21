@@ -30,4 +30,7 @@
     text-decoration: none;
     color: black;
   }
+  .signout:hover{
+    cursor: pointer;
+  }
 }

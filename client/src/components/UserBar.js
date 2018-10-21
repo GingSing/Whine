@@ -21,7 +21,7 @@ class UserBar extends Component{
         {this.props.signedIn ?
           <div>
             <Link to ="/post" className="post-link">Post</Link>
-            <div onClick={this.signOut}>Sign Out</div>
+            <div className="signout" onClick={this.signOut}>Sign Out</div>
           </div>
         : <div>
             <div className="register">
