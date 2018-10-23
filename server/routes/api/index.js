@@ -65,11 +65,22 @@ const reviewRestaurant = (req, res) => {
 }
 
 const reviewItem = (req, res) => {
-  console.log("reviewed");
-  Item.create(req.body, function(err, item){
+
+  var itemData = {
+    postedBy: mongoose.Types.ObjectId(req.body.username),
+    title: req.body.title,
+    content: req.body.content,
+    rating: req.body.rating,
+    pictures: req.body.pictures,
+    item: req.body.item
+  }
+
+  Item.create(itemData, function(err, item){
     if(err){
       res.send('error 404');
+      console.log(err);
     }else{
+      console.log(item);
       res.send(item);
     }
   });

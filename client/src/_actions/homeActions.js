@@ -1,5 +1,5 @@
 import { GETNEWPOSTS_REQUEST, GETNEWPOSTS_SUCCESS, GETNEWPOSTS_FAILURE } from './types';
-import { homeService } from '../_services/homeServices';
+import { homeService } from '../_services';
 
 export function getNewPosts(token){
   return dispatch => {

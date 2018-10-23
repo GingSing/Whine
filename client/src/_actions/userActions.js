@@ -1,5 +1,5 @@
-import { SIGNIN_REQUEST, SIGNIN_FAILURE, SIGNIN_SUCCESS, SIGNOUT, POST_REQUEST, POST_SUCCESS, POST_FAILURE } from './types';
-import { userService } from '../_services/userServices';
+import { SIGNIN_REQUEST, SIGNIN_FAILURE, SIGNIN_SUCCESS, SIGNOUT, POSTITEM_REQUEST, POSTITEM_SUCCESS, POSTITEM_FAILURE } from './types';
+import { userService } from '../_services';
 
 export function signIn(username, password){
   return dispatch => {
@@ -20,21 +20,24 @@ export function signIn(username, password){
   function failure(error) { return { type: SIGNIN_FAILURE, error }}
 }
 
-export function post(title, content, pictures){
+export function postItem(username, title, content, rating, pictures, item){
   return dispatch => {
     dispatch(request());
-    userService.post(title, content, pictures)
+    console.log("dispatchedrequest");
+    userService.postItem(username, title, content, rating, pictures, item)
       .then(
         post => {
-          dispatch()
+          dispatch(success());
         }
-      )
+      ).catch(err => {
+        dispatch(failure(err));
+      });
 
   }
 
-  function request(){ return { type: POST_REQUEST }}
-  function success(){ return { type: POST_SUCCESS }}
-  function failure(){ return { type: POST_FAILURE }}
+  function request(){ return { type: POSTITEM_REQUEST }}
+  function success(){ return { type: POSTITEM_SUCCESS }}
+  function failure(){ return { type: POSTITEM_FAILURE }}
 }
 
 export function signOut(){

@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
-import LogoBar from '../components/LogoBar';
-import NewsFeed from '../components/NewsFeed';
-import UserBar from '../components/UserBar';
+import { Footer, LogoBar, NewsFeed, UserBar } from '../components';
 
 class Home extends Component{
   render(){
@@ -30,8 +28,7 @@ class Home extends Component{
           <NewsFeed />
         </div>
 
-        <div className="footer">
-        </div>
+        <Footer />
       </div>
     );
   }

@@ -4,8 +4,10 @@
 }
 .feed-list{
   width: 80%;
-  border: 1px solid black;
-  height: 500px;
+  list-style-type: none;
+  min-height: 500px;
+  margin: 0;
+  padding: 0;
 }
 .feed-header{
   text-align: center;

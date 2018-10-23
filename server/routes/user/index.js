@@ -13,7 +13,7 @@ const logIn = (req, res) => {
     }else if(user.length > 0){
       user.map((data) => {
         if(bcrypt.compareSync(req.body.password, data.password)){
-          res.status(200).send(JSON.stringify({ success: "successful", user: data.username }));
+          res.status(200).send(JSON.stringify({ success: "successful", user: data.username, id: data.id }));
           //change to return tokens
         }
       })

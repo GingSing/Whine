@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { signIn } from '../_actions/userActions';
+import { signIn } from '../_actions';
 import { connect } from 'react-redux';
 
 import './SignIn.css';

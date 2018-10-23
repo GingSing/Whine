@@ -32,13 +32,13 @@ function register(){
 
 }
 
-function postItem(title, content, pictures){
+function postItem(username, title, content, rating, pictures, item){
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({title, content, pictures})
+    body: JSON.stringify({username, title, content, rating, pictures, item})
   };
-  return fetch('http://localhost:3001/api/reviewItem', requestOptions)
+  return fetch('http://localhost:3001/api/item/review', requestOptions)
     .then(res => {
       if(res.ok){
         return res.json()
@@ -46,10 +46,7 @@ function postItem(title, content, pictures){
         console.log("res not ok");
         throw Error(res.statusText);
       }
-    })
-    .then(post => {
-
-    })
+    });
 }
 
 function signOut(){

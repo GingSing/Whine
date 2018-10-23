@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getNewPosts } from '../_actions/homeActions';
+import { getNewPosts } from '../../_actions/homeActions';
 import { connect } from 'react-redux';
 import './NewsFeed.css';
 
@@ -31,7 +31,7 @@ class NewsFeed extends Component{
         <div className="feed">
           <ul className="feed-list">
             {
-              this.props.feed.map((data, key) => {return <li key={ key }><FeedCard data={data} /></li>})
+              this.props.feed.map((data, key) => {return <FeedCard key={key} data={data} />})
             }
           </ul>
           <div className="feed-page-selector">

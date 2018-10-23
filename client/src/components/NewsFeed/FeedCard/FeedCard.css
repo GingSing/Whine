@@ -1,0 +1,23 @@
+.feed-card{
+  height: 15%;
+  width: 100%;
+  border: 1px solid red;
+  transition: height 0.5s;
+}
+
+.feedcard-text{
+  height: 100%;
+  width: 100%;
+}
+
+.feedcard-header{
+}
+
+.longer{
+  height: 300px;
+  transition: height 1s;
+}
+
+.feedcard-article{
+  text-overflow: ellipsis;
+}
