@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
-import { Footer, LogoBar, NewsFeed, UserBar } from '../components';
+import { Footer, LogoBar, NewsFeed, UserBar } from '../../components';
 
 class Home extends Component{
   render(){

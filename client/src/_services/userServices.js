@@ -13,16 +13,22 @@ function signIn(username, password){
   };
   return fetch('http://localhost:3001/user/login', requestOptions)
     .then(res => {
-      if(res.ok){
+
+      let {ok, statusText} = res;
+
+      if(ok){
         return res.json()
-      }else{
-        console.log("res not ok");
-        throw Error(res.statusText);
       }
+      console.log("res not ok");
+      throw Error(statusText);
     })
-    .then(user => {
-      if(user && user.success === "successful"){
-        localStorage.setItem('user', user.user);
+    .then(data => {
+
+      let {user, success, token} = data;
+
+      if(user && token && success === "successful"){
+        localStorage.setItem('user', user);
+        localStorage.setItem('token', token);
       }
       return user;
     });
@@ -51,4 +57,6 @@ function postItem(username, title, content, rating, pictures, item){
 
 function signOut(){
   localStorage.removeItem('user');
+  localStorage.removeItem('token');
+  window.location.reload(); //quickfix
 }

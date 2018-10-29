@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import { postItem } from '../_actions';
+import { postItem } from '../../_actions';
 import { connect } from 'react-redux';
 
 class Post extends Component{

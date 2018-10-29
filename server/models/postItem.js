@@ -4,7 +4,7 @@ var Post = require('./post');
 var Schema = mongoose.Schema;
 
 var PostItem = Post.discriminator('PostItem', new Schema({
-    item: { type: String, required: true }
+    item: { type: Schema.Types.ObjectId, required: true }
   })
 );
 

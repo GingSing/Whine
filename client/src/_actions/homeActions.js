@@ -1,7 +1,8 @@
 import { GETNEWPOSTS_REQUEST, GETNEWPOSTS_SUCCESS, GETNEWPOSTS_FAILURE } from './types';
 import { homeService } from '../_services';
 
-export function getNewPosts(token){
+export function getNewPosts(){
+  let token = localStorage.getItem('token');
   return dispatch => {
     dispatch(request(token));
     homeService.getNewPosts(token)

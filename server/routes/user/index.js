@@ -1,7 +1,9 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const User = require('../../models/user');
-const bcrypt = require('bcryptjs');
+const User = require('../../models/user')
+const bcrypt = require('bcryptjs')
+var jwt = require('jsonwebtoken')
+var config = require('../../config')
 
 const usersRouter = express.Router();
 var db = mongoose.connection;
@@ -13,12 +15,17 @@ const logIn = (req, res) => {
     }else if(user.length > 0){
       user.map((data) => {
         if(bcrypt.compareSync(req.body.password, data.password)){
-          res.status(200).send(JSON.stringify({ success: "successful", user: data.username, id: data.id }));
+
+          var token = jwt.sign({ id: data.id }, config.secret, {
+            expiresIn: 86400 //24 hours
+          });
+
+          res.status(200).send({ success: "successful", user: data.username, token: token });
           //change to return tokens
         }
       })
     }else{
-      res.status(400).send(JSON.stringify({ error: "wrong password"}));
+      res.status(400).send({ error: "wrong password"});
     }
   })
 };
@@ -54,6 +61,7 @@ const register = (req, res) => {
   function containsAll(body){
     return (body.email !== "" && body.username !== "" && body.name !== "" && body.password !== "");
   }
+  
   function emailIsCorrect(body){
     let email = body.email;
     let endsWithComOrCa = email.endsWith(".ca") || email.endsWith(".com");

@@ -1,5 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
+var jwt = require('jsonwebtoken')
+var config = require('../../config');
 
 const apiRouter = express.Router();
 var db = mongoose.connection;
@@ -8,19 +10,24 @@ const Restaurant = require('../../models/postRestaurant');
 const Item = require('../../models/postItem');
 
 const getReviews = (req, res) => {
-  console.log("getting reviews");
-  Promise.all([
-    Restaurant.find(),
-    Item.find()
-  ])
-  .then(results => {
-    console.log("sending results");
-    console.log(results[0].concat(results[1]).slice(0,11));
-    res.send(results[0].concat(results[1]).slice(0,11));
-  })
-  .catch(err => {
-    console.log("Error");
-  })
+  verifyToken(req.body.token, res, function(data){
+    console.log("getting reviews");
+    Promise.all([
+      Restaurant.find(),
+      Item.find()
+    ])
+    .then(results => {
+      console.log("sending results");
+      res.send(results[0].concat(results[1]).slice(0,11));
+    })
+    .catch(err => {
+      console.log("Error");
+    })
+  });
+}
+
+const getItem = (req, res) => {
+
 }
 
 const getRestaurantReviews = (req, res) => {
@@ -85,6 +92,22 @@ const reviewItem = (req, res) => {
     }
   });
 }
+
+  function verifyToken(token, res, callback){
+
+    if(!token){
+      res.status(401).send({ auth: false, message: 'No token provided.' });
+    }else{
+      console.log("verifying");
+      jwt.verify(token, config.secret, function(err, decoded){
+        if(err){
+          res.status(500).send({ auth: false, message: 'Failed to authenicate token.' });
+        }
+        callback(decoded);
+      })
+    }
+
+  }
 
 apiRouter.get('/restaurant/reviews', getRestaurantReviews);
 apiRouter.get('/restaurant/reviews/:id', getRestaurantReview);

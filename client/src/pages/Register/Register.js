@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { LogoBar, UserBar } from '../components';
+import { LogoBar, UserBar } from '../../components';
 
 import './Register.css';
 

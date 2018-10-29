@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import './App.css';
 
-import Home from './pages/Home';
-import Restaurants from './pages/Restaurants';
-import Products from './pages/Products';
-import Register from './pages/Register';
-import SignIn from './pages/SignIn';
-import Post from './pages/Post';
+import { Products, Home, Restaurants, Register, SignIn, Post } from './pages';
 
 class App extends Component {
   render() {
